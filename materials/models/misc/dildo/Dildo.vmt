@@ -1,0 +1,11 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/misc/dildo/Dildo"
+	"$bumpmap" "models/misc/dildo/Dildo_nm"
+	
+	$phong			1
+
+	$phongexponent		7
+	$phongboost		3
+	$phongfresnelranges	"[0.3 0.7 2]"
+}
