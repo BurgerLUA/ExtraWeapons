@@ -22,6 +22,11 @@ function ENT:Initialize()
 	
 	self.Hit = 0
 	
+	self.Sound1PlayTime = 0
+	self.Sound1HasPlayed = true
+		
+	self.Sound2PlayTime = 0
+	self.Sound2HasPlayed = true
 	
 	
 	self:GetPhysicsObject():SetBuoyancyRatio(0)
@@ -70,6 +75,7 @@ function ENT:PhysicsCollide(data, physobj)
 
 
 	if data.HitEntity:GetClass() == "worldspawn" && data.Speed > 2000 then
+		physobj:EnableCollisions( false )
 		self.Hit = 1
 		physobj:EnableMotion(false)
 		--print(data.HitNormal)
@@ -90,18 +96,17 @@ function ENT:PhysicsCollide(data, physobj)
 		self.Pos2 = self.HitP - self.HitN
 		util.Decal("ExplosiveGunshot", self.Pos1, self.Pos2)
 			
-			
-			
-			
-			
+
 		
-		timer.Create(self:EntIndex().."arm", 3, 1, function()
-			if not self:IsValid() then return end
-			self:EmitSound("npc/ministrider/ministrider_preflechette.wav")
-		end)
+		self.Sound1PlayTime = CurTime() + 3
+		self.Sound1HasPlayed = false
+		
+		self.Sound2PlayTime = CurTime() + 4.25
+		self.Sound2HasPlayed = false
+		
+		
+		
 		timer.Create(self:EntIndex().."arm2", 4.25, 1, function()
-			if not self.Entity:IsValid() then return end
-			self:EmitSound("npc/roller/remote_yes.wav")
 			self.EnableTrace = 1
 		end)
 		
@@ -131,6 +136,21 @@ end
 
 
 function ENT:Think()
+	--print("I AM THINKING")
+	if self.Sound1HasPlayed == false then
+		if self.Sound1PlayTime < CurTime() then
+			self.Entity:EmitSound("npc/ministrider/ministrider_preflechette.wav",100,100)
+		end
+	end
+
+	if self.Sound2HasPlayed == false then
+		if self.Sound2PlayTime < CurTime() then
+			self.Entity:EmitSound("npc/roller/remote_yes.wav",100,100)
+		end	
+	end
+
+
+
 	if self.EnableTrace == 1 then
 	
 		self:SetNWBool( "Enable", true)
@@ -147,7 +167,7 @@ function ENT:Think()
 			
 			--print(self:GetPos())
 			
-			if self.target == self.Owner then return end
+			--if self.target == self.Owner then return end
 		
 			self.target:TakeDamage( 5, self.Owner, self )
 			self:EmitSound("ambient/alarms/klaxon1.wav")
