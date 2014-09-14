@@ -134,7 +134,7 @@ function ENT:Think()
 		end
 	else return end
 
-	if not self.Owner:Alive() then Detonate(self,self:GetPos()) return end
+	if not self.Owner:Alive() then self:Detonate(self,self:GetPos()) return end
 	
 	if self.Owner:GetActiveWeapon():GetClass() == "weapon_bur_c4" and self.Owner:KeyDown( IN_ATTACK2 ) then
 		if self.Parented == 1 then
