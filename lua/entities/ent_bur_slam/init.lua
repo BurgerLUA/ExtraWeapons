@@ -93,7 +93,7 @@ function ENT:PhysicsCollide(data, physobj)
 				
 				elseif not data.HitEntity:Alive() then
 					if self:IsValid() then
-						Detonate(self,self.HitEntity:GetPos())
+						self:Detonate(self,self.HitEntity:GetPos())
 						timer.Destroy("CheckValid"..self:EntIndex()) 
 					end
 				end
@@ -138,9 +138,9 @@ function ENT:Think()
 	
 	if self.Owner:GetActiveWeapon():GetClass() == "weapon_bur_c4" and self.Owner:KeyDown( IN_ATTACK2 ) then
 		if self.Parented == 1 then
-			Detonate(self,self.HitEntity:GetPos())
+			self:Detonate(self,self.HitEntity:GetPos())
 		else
-			Detonate(self,self:GetPos())
+			self:Detonate(self,self:GetPos())
 		end
 			
 	end
@@ -172,7 +172,7 @@ function ENT:OnTakeDamage( dmginfo )
 end
 
 
-function Detonate(self,pos)
+function ENT:Detonate(self,pos)
 	if not self:IsValid() then return end
 	local effectdata = EffectData()
 		effectdata:SetStart( pos ) // not sure if we need a start and origin (endpoint) for this effect, but whatever

@@ -3,7 +3,7 @@ if SERVER then
 end
 
 if CLIENT then
-	SWEP.PrintName			= "CSS HE GRENADE"
+	SWEP.PrintName			= "Sensor Launcher"
 	SWEP.Slot				= 1
 	SWEP.SlotPos			= 3
 	killicon.AddFont( "weapon_cs_he", "csd", "O", Color( 255, 80, 0, 255 ) )
@@ -14,7 +14,7 @@ end
 SWEP.HoldType			= "shotgun"
 SWEP.Base				= "weapon_cs_base"
 SWEP.Spawnable			= true
-SWEP.Category			= "Counter-Strike"
+SWEP.Category			= "Burger's Weapons"
 
 SWEP.ViewModel			= "models/weapons/c_shotgun.mdl"
 SWEP.WorldModel			= "models/weapons/w_shotgun.mdl"
