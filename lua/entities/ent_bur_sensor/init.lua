@@ -140,12 +140,14 @@ function ENT:Think()
 	if self.Sound1HasPlayed == false then
 		if self.Sound1PlayTime < CurTime() then
 			self.Entity:EmitSound("npc/ministrider/ministrider_preflechette.wav",100,100)
+			self.Sound1HasPlayed = true
 		end
 	end
 
 	if self.Sound2HasPlayed == false then
 		if self.Sound2PlayTime < CurTime() then
 			self.Entity:EmitSound("npc/roller/remote_yes.wav",100,100)
+			self.Sound2HasPlayed = true
 		end	
 	end
 
