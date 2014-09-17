@@ -116,7 +116,7 @@ function SWEP:SecondaryAttack()
 
 	else
 
-		ent:EmitSound( DenySound )
+		self:EmitSound( DenySound )
 
 		self:SetNextPrimaryFire( CurTime() + 0.25 )
 		self:SetNextSecondaryFire( CurTime() + 0.25 )
